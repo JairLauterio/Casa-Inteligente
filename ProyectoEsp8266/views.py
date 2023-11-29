@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 import  requests
 
-ESP8266_IP = '192.168.100.1'  # Cambia por la dirección IP de tu ESP8266
+ESP8266_IP = '192.168.100.148'  # Cambia por la dirección IP de tu ESP8266
 
 ##@login_required
 def control_led(request):
