@@ -1,0 +1,37 @@
+<!-- control_led.html en tus plantillas Django -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Casa inteligente</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+.w3-button {width:150px;}
+</style>
+
+<body>
+    <h1>Control Foco</h1>
+    <form action="{% url 'encender_led' %}" method="post">
+        {% csrf_token %}
+         <button class="w3-button w3-green w3-round-large"  style="width:15%" type="submit" value="Encender Foco Sala">Encender Foco Sala</button>
+    </form>
+    <br>
+    <form action="{% url 'apagar_led' %}" method="post">
+        {% csrf_token %}
+        <button class="w3-button w3-deep-orange w3-round-large"  style="width:15%" type="submit" value="Apagar Foco Sala">Apagar Foco Sala</button>
+    </form>
+
+            <h1>Control Cochera</h1>
+        <form action="{% url 'abrir_cochera' %}" method="post">
+        {% csrf_token %}
+            <button class="w3-button w3-green w3-round-large " type="submit" value="Abrir cochera">Abrir cochera</button>
+    </form>
+
+         <br>
+        <form action="{% url 'cerrar_cochera' %}" method="post">
+        {% csrf_token %}
+            <button class="w3-button w3-deep-orange w3-round-large" type="submit" value="Cerrar cochera">Cerrar cochera</button>
+    </form>
+</body>
+</html>
