@@ -2,9 +2,12 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-import  requests
+import requests
+
 
 ESP8266_IP = '192.168.100.148'  # Cambia por la dirección IP de tu ESP8266
+##ESP8266_IP = '192.168.100.27'
+
 
 ##@login_required
 def control_led(request):
@@ -17,14 +20,17 @@ def salir(request):
 def encender_led(request):
     url = f"http://{ESP8266_IP}/encender"
     response = requests.get(url)
+    print(response.status_code)
     if response.status_code == 200:
         return render(request, 'control_led.html')  # Otra vez a la página de control
     else:
         return HttpResponse("Error al encender el LED")
 
 def apagar_led(request):
+    user_ip = request.META.get('HTTP_X_FORWARDED_FOR')
     url = f"http://{ESP8266_IP}/apagar"
     response = requests.get(url)
+    print(response.status_code)
     if response.status_code == 200:
         return render(request, 'control_led.html')  # Otra vez a la página de control
     else:
@@ -33,6 +39,7 @@ def apagar_led(request):
 def abrir_cochera(request):
     url = f"http://{ESP8266_IP}/cerrar"
     response = requests.get(url)
+    print(response.status_code)
     if response.status_code == 200:
         return render(request, 'control_led.html')  # Otra vez a la página de control
     else:
@@ -41,6 +48,7 @@ def abrir_cochera(request):
 def cerrar_cochera(request):
     url = f"http://{ESP8266_IP}/abrir"
     response = requests.get(url)
+    print(response.status_code)
     if response.status_code == 200:
         return render(request, 'control_led.html')  # Otra vez a la página de control
     else:

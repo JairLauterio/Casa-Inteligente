@@ -8,7 +8,7 @@ const char* password = "hw722qVC";
 
 ESP8266WebServer server(80);
 
-const int ledPin = 2; // Pin donde está conectado el LED
+const int ledPin = 14; // Pin donde está conectado el LED
 Servo myservo;
 int servoPin = D1; // Pin D1 del ESP8266
 
@@ -16,7 +16,8 @@ void setup() {
   Serial.begin(115200);
 
   myservo.attach(servoPin); // Adjunta el servo al pin correspondiente
-  pinMode(LED_BUILTIN, OUTPUT);
+  myservo.write(180);
+  pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, LOW);
   Serial.println("Connecting");
   WiFi.begin(ssid, password);
@@ -31,14 +32,14 @@ void setup() {
   Serial.println("conectado");
 
   server.on("/encender", []() {
-    digitalWrite(LED_BUILTIN, LOW);
+    digitalWrite(ledPin, HIGH);
     delay(1000); // Esperar un segundo
     server.send(200, "text/plain", "LED encendido");
     Serial.println("Encendido");
   });
 
   server.on("/apagar", []() {
-    digitalWrite(LED_BUILTIN, HIGH);
+    digitalWrite(ledPin, LOW);
     delay(1000); // Esperar un segundo
     server.send(200, "text/plain", "LED apagado");
     Serial.println("Apagado");
